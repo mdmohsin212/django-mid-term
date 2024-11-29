@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="d-flex flex-wrap px-3 pt-4 align-items-center">
+    <div class="col-md-6">
+        <img src="{{ data.img.url }}" alt="{{ data.name }}" class="w-100 img-fluid">
+    </div>
+    <div class="col-md-6 p-4">
+        <div class="card-body">
+            <h1 class="card-title">{{ data.name }}</h1>
+            <h3 class="card-title">Brand: {{ data.brand }}</h3><br>
+            <h4 class="card-title">$ {{ data.price }}</h4><br>
+            <h4 class="card-title"> Quantity : {{ data.quantity }}</h4><br>
+            <h3>{{ data.des }}</h3>
+            <hr>
+            {% if request.user.is_authenticated %}
+                <a class="btn btn-dark" href="{% url "buy" data.id %}">Buy Now</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="card m-2">
+  <h5 class="p-3">Total Comment : {{comments | length}}</h5>
+  {% for i in comments %}
+  <div class="card-body border m-2">
+      <p><b>{{i.name}}</b> On {{i.time}}</p>
+      <p>{{i.body}}</p>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="m-5">
+    <form method="post" class="w-50 m-auto">
+        <h1>Comment</h1>
+        {% csrf_token %}
+        {% load crispy_forms_tags %}
+        {{form|crispy}}
+        <button class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+{% endblock content %}

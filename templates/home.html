@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="d-flex flex-wrap px-3 pt-4 align-items-center">
+    <div class="col-md-6 col-12 order-2 order-md-1 text-center text-md-start">
+        <b class="p-1">
+            <b>Welcome to Roadvibe!</b>  
+            Explore a dynamic collection of cars that redefine style, performance, and comfort. At Roadvibe, we bring you sleek sedans, robust SUVs, and thrilling sports cars tailored to fit your lifestyle. Discover unbeatable deals, compare models, and make your dream car a reality. Our team is dedicated to providing a seamless experience, ensuring you drive away with confidence and satisfaction. Whether you're upgrading or buying your first car, Roadvibe is here to make every journey exceptional. Start exploring now and embrace the vibe of the road like never before.
+        </b>
+    </div>
+    <div class="col-md-6 col-12 order-1 order-md-2 text-center">
+        <img src="{% static 'home.png' %}" alt="Roadvibe" class="w-100 img-fluid">
+    </div>
+</div>
+
+<h3 class="text-center fs-1 pt-4">Products</h3><hr class="mx-5">
+
+
+<div class="text-center flex-wrap py-2">
+    <a class="btn btn-outline-dark m-2" href="{% url "home" %}">All</a>
+    {% for i in catagory %}
+    <a class="btn btn-outline-dark m-2" href="{% url "category_slug" i.slug %}">{{i.brand_name}}</a>
+    {% endfor %}
+</div>
+
+<h4 class="text-center">Total Result : {{data|length}} </h4>
+
+<div class="d-flex flex-wrap justify-content-center gap-4 m-md-4">
+    {% for i in data %}
+    <div class="card col-md-3 col-sm-12 m-2">
+        <img src="{{ i.img.url }}" class="card-img-top h-50" alt="...">
+        <div div class="card-body">
+            <h5 class="card-title text-center">Model : {{i.name}}</h5>
+            <h5 class="card-title text-center">Brand : {{i.brand}}</h5><hr>
+            <h5 class="card-title text-center">$ {{i.price}}</h5><hr>
+            <div class="text-center">
+            <a class="btn btn-dark" href="{% url "deatils_views" i.id %}">Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock content %}

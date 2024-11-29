@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<form class="w-50 m-auto pt-5" method="post">
+  <h1>Update Your Profile Page</h1>
+  {% csrf_token %} 
+  {% load crispy_forms_tags %}
+  {{form|crispy}}
+  <button class="btn btn-warning" type="submit">Submit</button>
+</form>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center">Profile</h1>
+<div class="w-50 m-auto border border-3 rounded p-3">
+    <p><b>Name:</b> {{ user.first_name }} {{ user.last_name }}</p>
+    <p><b>Email:</b> {{ user.email }}</p>
+    <p><b>Username:</b> {{ user.username }}</p>
+    <a href="{% url "edit_profile" %}" class="btn btn-warning">Edit Your Profile</a>
+</div>
+
+<h2 class="text-center pt-3">Buy History</h2>
+
+<div class="d-flex flex-wrap justify-content-center gap-4 m-md-4">
+    {% for i in data %}
+    <div class="card col-md-3 col-sm-12 m-2">
+        <img src="{{ i.product.img.url }}" class="card-img-top h-50" alt="...">
+        <div div class="card-body">
+            <h5 class="card-title text-center">Model : {{i.product.name}}</h5>
+            <h5 class="card-title text-center">Brand : {{i.product.brand}}</h5><hr>
+            <h5 class="card-title text-center">$ {{i.product.price}}</h5>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}
